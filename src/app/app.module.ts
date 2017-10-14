@@ -5,7 +5,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+
 
 import 'hammerjs';
 import { MenuComponent } from './menu/menu.component';
@@ -34,7 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     FlexLayoutModule,
     AppRoutingModule
   ],
-  providers: [DishService],
+  providers: [DishService,PromotionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
