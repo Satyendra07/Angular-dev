@@ -33,4 +33,18 @@ fxLayoutGap="10px">
 </md-card-content>
 </md-card>
 
+<md-card *ngIf="featuredleader" fxFlex>
+    <md-card-header>
+    <div md-card-avatar></div>
+    <md-card-title>
+     <h3>{{featuredleader.name | uppercase}}</h3>
+    </md-card-title>
+    </md-card-header>
+    <img md-card-image src={{featuredleader.image}} alt={{featuredleader.name}}>
+    <md-card-content>
+    <p>{{featuredleader.designation}}</p>    
+    <p>{{featuredleader.description}}
+    </p>
+    </md-card-content>
+    </md-card>
 </div>
