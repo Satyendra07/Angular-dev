@@ -12,11 +12,17 @@ export class PromotionService {
   }
 
   getPromotion(id: number): Promise<Promotion> {
-    return Promise.resolve(PROMOTIONS.filter((promo) => (promo.id === id))[0]);
+    return new Promise(resolve=>{
+      
+    });
+    // return Promise.resolve(PROMOTIONS.filter((promo) => (promo.id === id))[0]);
   }
 
   getFeaturedPromotion(): Promise<Promotion> {
-    return Promise.resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]);
+    return new Promise(resolve=>{
+      setTimeout(() => resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]), 2000);
+    });
+    //return Promise.resolve(PROMOTIONS.filter((promotion) => promotion.featured)[0]);
   }
 
 
