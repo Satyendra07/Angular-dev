@@ -46,8 +46,47 @@ fxLayoutGap.xs="0">
       </md-list-item>
       
   </md-list>
+
+   <md-list >
+      <md-list-item *ngIf="feedbackForm.valid">
+      <h3 mdLine>{{ feedbackForm.value.feedback | json }}  </h3>
+      <h3 mdLine> {{ feedbackForm.value.rating | json }} Stars </h3>
+      <h3 mdLine> --{{ feedbackForm.value.author | json }} </h3>
+    </md-list-item>
+      
+     </md-list> 
   </md-card>
-  
+
+
+  <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <p>
+        <md-input-container class="full-width"  dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+         <input mdInput  placeholder="Name" formControlName="author" type="text" required>
+       
+       <md-hint>
+          <span [hidden]="!(formErrors.author)">
+            {{formErrors.author}}</span>
+        </md-hint>
+      </md-input-container>
+    </p>
+    <p>
+        <md-slider min="1" max="5" step="1" value="1" formControlName="rating" thumbLabel tickInterval="1"></md-slider>
+    </p>
+    <p>
+        <md-input-container class="full-width" dividerColor="{{(formErrors.feedback) ? 'warn' : 'primary'}}">
+          <textarea mdInput  placeholder="Your Comment" formControlName="feedback" rows=12 required></textarea>
+          <md-hint>
+              <span [hidden]="!(formErrors.feedback)">
+                {{formErrors.feedback}}</span>
+            </md-hint>
+        </md-input-container>
+        
+     </p>   
+      <div>
+        <button type="submit" md-button class="background-primary text-floral-white" 
+        [disabled]="feedbackForm.invalid">Submit</button>
+      </div> 
+  </form>
 </div>
 <div [hidden]="dish">
   <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
