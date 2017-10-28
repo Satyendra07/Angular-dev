@@ -1,5 +1,5 @@
 
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { DatePipe } from '@angular/common';
 import { DishService } from '../services/dish.service';
@@ -29,14 +29,15 @@ export class DishdetailComponent implements OnInit {
   
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
-    private location: Location,private fb: FormBuilder) { 
+    private location: Location,private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) { 
       this.createForm();
     }
 
     createForm() {
       this.feedbackForm = this.fb.group({
         author: ['', [Validators.required, Validators.minLength(2)] ],
-        feedback: ['', [Validators.required, Validators.minLength(2)] ],
+        feedback: ['', [Validators.required] ],
         rating: '',
         date: ''
       });
@@ -74,7 +75,7 @@ export class DishdetailComponent implements OnInit {
       this.dish.comments.push(this.comment);
       this.feedbackForm.reset({
         author: '',
-        rating: '',
+        rating: '5',
         feedback: '',
         date: ''
       });
@@ -110,7 +111,7 @@ export class DishdetailComponent implements OnInit {
     },
     'feedback': {
       'required':      'Comment is required.',
-      'minlength':     'Comment must be at least 2 characters long.'
+      
     },
   };
 

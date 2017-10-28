@@ -13,7 +13,7 @@ fxLayoutGap.xs="0">
         <h3>{{dish.name | uppercase}}</h3>
       </md-card-title>
     </md-card-header>
-    <img md-card-image src={{dish.image}} alt={{dish.name}}>
+    <img md-card-image src="{{BaseURL + dish.image}}" alt={{dish.name}}>
     <md-card-content>
       <p>{{dish.description}}
       </p>
@@ -70,7 +70,7 @@ fxLayoutGap.xs="0">
       </md-input-container>
     </p>
     <p>
-        <md-slider min="1" max="5" step="1" value="1" formControlName="rating" thumbLabel tickInterval="1"></md-slider>
+        <md-slider min="1" max="5" step="1" value="5" formControlName="rating" thumbLabel tickInterval="1"></md-slider>
     </p>
     <p>
         <md-input-container class="full-width" dividerColor="{{(formErrors.feedback) ? 'warn' : 'primary'}}">
