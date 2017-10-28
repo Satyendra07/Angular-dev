@@ -27,6 +27,7 @@ export class DishdetailComponent implements OnInit {
   feedbackForm: FormGroup;
   comment: Comment;
   errMess: string;
+  dishcopy = null;
   
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
@@ -73,7 +74,10 @@ export class DishdetailComponent implements OnInit {
         date: new Date().toISOString()
       };
       console.log(this.comment);
-      this.dish.comments.push(this.comment);
+      
+      this.dishcopy.comments.push(this.comment);
+      this.dishcopy.save()
+        .subscribe(dish => { this.dish = dish; console.log(this.dish); });
       this.feedbackForm.reset({
         author: '',
         rating: '5',
@@ -85,11 +89,11 @@ export class DishdetailComponent implements OnInit {
   ngOnInit() {
     // let id = +this.route.snapshot.params['id'];
     // this.dishservice.getDish(id).subscribe(dish => this.dish = dish);
-    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds,
-      errmess => this.errMess = <any>errmess);
+    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds );
     this.route.params
       .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+      .subscribe(dish => { this.dish = dish;this.dishcopy = dish; this.setPrevNext(dish.id); },
+      errmess => this.errMess = <any>errmess);
   }
 
   setPrevNext(dishId: number) {
