@@ -33,15 +33,21 @@ fxLayoutGap="10px">
  <h3>{{promotion.name | uppercase}}</h3>
 </md-card-title>
 </md-card-header>
-<img md-card-image src={{promotion.image}} alt={{promotion.name}}>
+<img md-card-image src="{{BaseURL + promotion.image}}" alt={{promotion.name}}>
 <md-card-content>
 <p>{{promotion.description}}
 </p>
 </md-card-content>
 </md-card>
-<div [hidden]="promotion">
+<div [hidden]="promotion || promErrMess ">
     <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
   </div>
+  <div *ngIf="promErrMess ">
+    <h2>Error</h2>
+    <h4>{{promErrMess}}</h4>
+  </div>
+  
+
 
 <md-card *ngIf="featuredleader" fxFlex [@expand]>
     <md-card-header>
@@ -50,14 +56,18 @@ fxLayoutGap="10px">
      <h3>{{featuredleader.name | uppercase}}</h3>
     </md-card-title>
     </md-card-header>
-    <img md-card-image src={{featuredleader.image}} alt={{featuredleader.name}}>
+    <img md-card-image src="{{BaseURL + featuredleader.image}}" alt={{featuredleader.name}}>
     <md-card-content>
     <p>{{featuredleader.designation}}</p>    
     <p>{{featuredleader.description}}
     </p>
     </md-card-content>
     </md-card>
-    <div [hidden]="featuredleader">
+    <div [hidden]="featuredleader || leadErrMess ">
         <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+      <div *ngIf="leadErrMess">
+        <h2>Error</h2>
+        <h4>{{leadErrMess}}</h4>
       </div>
 </div>

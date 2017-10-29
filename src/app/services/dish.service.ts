@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 export class DishService {
 
   constructor(private restangular: Restangular,
+    
     private processHTTPMsgService: ProcessHttpmsgService) { }
   
     getDishes(): Observable<Dish[]> {

@@ -12,34 +12,49 @@ fxLayoutGap="10px">
 <div fxFlex>
  <h3>Location Information</h3> 
  <div fxLayout="column" fxLayout.gt-sm="row">
-     <div fxFlex="50" fxFlexOffset="20px">
-           <h4>Our Address</h4>
-           <address>
-             121, Clear Water Bay Road<br>
-             Clear Water Bay, Kowloon<br>
-             HONG KONG<br>
-             <i class="fa fa-phone"></i>: +852 1234 5678<br>
-             <i class="fa fa-fax"></i>: +852 8765 4321<br>
-             <i class="fa fa-envelope"></i>: 
-                   <a href="mailto:confusion@food.net">confusion@food.net</a>
-          </address>
-          <p></p>
-           <div>
-               <a md-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
-               <a md-raised-button><i class="fa fa-skype"></i> Skype</a>
-               <a md-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
-           </div>
-       </div>
-     <div fxFlex="40">
-           <h4>Map of our Location</h4>
-     </div>
-   </div>
- </div>
+            <div fxFlex="50" fxFlexOffset="20px">
+                        <h4>Our Address</h4>
+                        <address>
+                          121, Clear Water Bay Road<br>
+                          Clear Water Bay, Kowloon<br>
+                          HONG KONG<br>
+                          <i class="fa fa-phone"></i>: +852 1234 5678<br>
+                          <i class="fa fa-fax"></i>: +852 8765 4321<br>
+                          <i class="fa fa-envelope"></i>: 
+                                <a href="mailto:confusion@food.net">confusion@food.net</a>
+                        </address>
+                        <p></p>
+                        <div>
+                            <a md-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+                            <a md-raised-button><i class="fa fa-skype"></i> Skype</a>
+                            <a md-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
+                        </div>
+            </div>
+                  <div fxFlex="40">
+                        <h4>Map of our Location</h4>
+                  </div>
+  </div>
+</div>
  <div fxFlex fxFlexOffset="20px" class="form-size">
   <h3>Send us your Feedback</h3>
-  <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+ 
 
-  <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="showForm" [hidden]="feedbackCopy" [@expand]>
+      <h3>Submitting Form</h3>
+      <md-spinner></md-spinner>
+    </div>
+    <div *ngIf="feedbackCopy" [hidden]="showForm" [@expand]>
+      <h3>You Submission</h3>
+      <p>First Name: {{feedbackCopy.firstname}}</p>
+      <p>Last Name: {{feedbackCopy.lastname}}</p>
+      <p>Tel. Number: {{feedbackCopy.telnum}}</p>
+      <p>Email: {{feedbackCopy.email}}</p>
+      <p>Contact You?: {{feedbackCopy.agree}}</p>
+      <p>How?: {{feedbackCopy.contacttype}}</p>
+      <p>Feedback: {{feedbackCopy.message}}</p>
+    </div> 
+
+  <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [hidden]="feedbackCopy || showForm" [@expand]>
     <p>
       <md-input-container class="half-width"
        dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
@@ -97,5 +112,7 @@ fxLayoutGap="10px">
     [disabled]="feedbackForm.invalid">Submit</button>
   </form>
 </div>
+
+
 
 </div>

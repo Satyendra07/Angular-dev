@@ -63,7 +63,7 @@ fxLayoutGap="10px">
             </md-card-header>
             <md-list *ngFor="let lead of leader">
              
-              <img md-card-sm-image src={{lead.image}} alt={{lead.name}} style="border-radius:80px">
+              <img md-card-sm-image src="{{BaseURL + lead.image}}" alt={{lead.name}} style="border-radius:80px">
                 <div fxFlex="95">
                 <md-list-item >                
                   <h3 mdLine> {{lead.name}} {{lead.abbr}}</h3>
@@ -74,9 +74,13 @@ fxLayoutGap="10px">
           
            </md-list>
       </md-card>
-      <div [hidden]="leader">
-        <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
-      </div>
+      <div [hidden]="leader || leadErrMess ">
+          <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+        </div>
+        <div *ngIf="leadErrMess">
+            <h2>Error</h2>
+            <h4>{{leadErrMess}}</h4>
+          </div>
     
   </div>
 </div>
